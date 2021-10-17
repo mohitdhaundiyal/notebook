@@ -6,6 +6,9 @@ const {
     body,
     validationResult
 } = require('express-validator');
+
+const fetchUser = require('../middleware/fetchUser')
+
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = "bitchhhhh"
 
@@ -46,10 +49,18 @@ router.post('/register', [
         name: req.body.name,
         email: req.body.email,
         password: cryptPass,
-    }).then(user => res.json(user))
-
-
+    })
+    const data = {
+        user: {
+            id: user.id
+        }
+    }
+    const authtoken = jwt.sign(data, JWT_SECRET)
+    res.send({
+        "authtoken": authtoken
+    })
 })
+
 
 // Authenticate - login
 router.post('/login', [
@@ -102,6 +113,18 @@ router.post('/login', [
     } catch (error) {
         console.log(error)
         res.status(500).send("some error occured")
+    }
+})
+
+
+// Route : getUser
+router.post('/getUser', fetchUser, async (req, res) => {
+    try {
+        userId = req.user.id;
+        const user = await User.findById(userId).select("-password")
+        res.send(user)
+    } catch (error) {
+
     }
 })
 
