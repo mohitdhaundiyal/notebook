@@ -92,12 +92,16 @@ router.post('/login', [
         });
 
         if (!user) {
-            res.send('Invalid login, Please use correct credentials.')
+            res.send({
+                "error": "Invalid login, Please use correct credentials."
+            })
         } else {
 
             const passCompare = await bcrypt.compare(password, user.password)
             if (!passCompare) {
-                res.send('Invalid login, Please use correct credentials.')
+                res.send({
+                    "error": 'Invalid login, Please use correct credentials.'
+                })
             } else {
                 const data = {
                     user: {
