@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router';
 
 export default function Login() {
-
     const [cred, setCred] = useState({ email: "", password: "" })
+    const history = useHistory();
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -13,8 +15,13 @@ export default function Login() {
             },
             body: JSON.stringify({ email: cred.email, password: cred.password })
         });
+
         const json = await response.json()
         console.log(json)
+        if (json.authtoken) {
+            localStorage.setItem('token', json.authtoken);
+            history.push('/home');
+        }
     }
 
     const onChange = (e) => {

@@ -24,7 +24,7 @@ router.post('/addNote', fetchUser, async (req, res) => {
 router.get('/getNotes', fetchUser, async (req, res) => {
     const notes = await Notes.find({
         user: req.user.id
-    })
+    }).sort('-timestamp')
     res.json(notes)
 })
 

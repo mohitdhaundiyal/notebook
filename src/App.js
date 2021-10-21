@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import About from './components/About';
+import './App.css'
 import {
     BrowserRouter as Router,
     Switch,
