@@ -29,7 +29,7 @@ router.get('/getNotes', fetchUser, async (req, res) => {
 })
 
 // Update notes
-router.put('/update/:id', fetchUser, async (req, res) => {
+router.put('/updateNote/:id', fetchUser, async (req, res) => {
     const {
         title,
         description,
@@ -63,15 +63,19 @@ router.put('/update/:id', fetchUser, async (req, res) => {
 })
 
 // Delete note
-router.delete('/delete/:id', fetchUser, async (req, res) => {
+router.delete('/deleteNote/:id', fetchUser, async (req, res) => {
     // Find note to be deleted and verify if it belong to same user
     let note = await Notes.findById(req.params.id);
     if (!note) {
-        return res.status(404).send('Not found')
+        return res.status(404).send({
+            error: 'Not found'
+        })
     }
 
     if (note.user.toString() != req.user.id) {
-        return res.status(401).send('Not allowed')
+        return res.status(401).send({
+            error: 'Not allowed'
+        })
     }
 
     note = await Notes.findByIdAndDelete(req.params.id)

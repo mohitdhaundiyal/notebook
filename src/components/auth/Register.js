@@ -6,6 +6,10 @@ export default function Register() {
     const [details, setDetails] = useState({ name: "", email: "", password: "" })
     let history = useHistory();
 
+    if (localStorage.getItem('token')) {
+        history.push('/home');
+    }
+
     const onRegister = async (e) => {
         e.preventDefault()
         const response = await fetch("http://localhost:5000/api/auth/register", {
@@ -29,7 +33,7 @@ export default function Register() {
 
     return (
         <div className="d-flex justify-content-center my-4">
-            <div className="card col-lg-5 col-md-10 col-12 shadow-sm rounded-3">
+            <div className="card col-lg-5 col-md-10 col-12 shadow" style={{ borderRadius: '1rem' }}>
                 <div className="card-body">
                     <h4 className="card-title">
                         Register

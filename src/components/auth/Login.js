@@ -2,8 +2,13 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router';
 
 export default function Login() {
+
     const [cred, setCred] = useState({ email: "", password: "" })
     const history = useHistory();
+
+    if (localStorage.getItem('token')) {
+        history.push('/home');
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -30,7 +35,7 @@ export default function Login() {
 
     return (
         <div className="d-flex justify-content-center my-4">
-            <div className="card col-lg-5 col-md-10 col-12 shadow-sm rounded-3">
+            <div className="card col-lg-5 col-md-10 col-12 shadow" style={{ borderRadius: '1rem' }}>
                 <div className="card-body">
                     <h4 className="card-title">
                         Login
