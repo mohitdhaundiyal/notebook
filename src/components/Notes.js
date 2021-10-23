@@ -25,7 +25,7 @@ export default function Notes() {
 
     return (
         <div className="my-3">
-            <h4>Your Notes</h4>
+            <h5>Your Notes</h5>
             <hr />
 
             <Masonry

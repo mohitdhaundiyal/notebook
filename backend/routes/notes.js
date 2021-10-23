@@ -35,6 +35,7 @@ router.put('/updateNote/:id', fetchUser, async (req, res) => {
         description,
         tag
     } = req.body;
+
     // Create newNote object
     const newNote = {};
     if (title) {
@@ -46,6 +47,7 @@ router.put('/updateNote/:id', fetchUser, async (req, res) => {
     if (tag) {
         newNote.tag = tag
     };
+
     // Find note to be updated
     let note = await Notes.findById(req.params.id);
     if (!note) {
@@ -59,7 +61,9 @@ router.put('/updateNote/:id', fetchUser, async (req, res) => {
     }, {
         new: true
     })
-    res.send(note)
+    res.send({
+        message: "successfully updated"
+    })
 })
 
 // Delete note

@@ -25,6 +25,8 @@ export default function Login() {
         console.log(json)
         if (json.authtoken) {
             localStorage.setItem('token', json.authtoken);
+            localStorage.setItem('authName', json.authName);
+
             history.push('/home');
         }
     }

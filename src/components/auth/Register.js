@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Component } from 'react';
 import { useHistory } from 'react-router'
 
 export default function Register() {

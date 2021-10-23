@@ -1,5 +1,6 @@
 import React from 'react'
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './components/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -37,6 +38,7 @@ export default function App() {
                     </Switch>
                 </div>
             </Router>
+            <Footer />
         </NoteState>
     )
 }

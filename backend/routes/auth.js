@@ -15,7 +15,6 @@ const JWT_SECRET = "bitchhhhh"
 
 // Register
 router.post('/register', [
-    // validations
     body('email', 'Invalid email').isEmail(),
     body('password', 'Password length must be atleast 6 characters')
     .isLength({
@@ -108,9 +107,11 @@ router.post('/login', [
                         id: user.id
                     }
                 }
+                const authName = user.name
                 const authtoken = jwt.sign(data, JWT_SECRET)
                 res.send({
-                    "authtoken": authtoken
+                    "authtoken": authtoken,
+                    "authName": authName
                 })
             }
         }
